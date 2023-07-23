@@ -3,16 +3,14 @@ const express = require('express')
 const logger = require('./middleware/logger')
 const err404 = require('./middleware/err-404')
 const indexRouter = require('./routes/index')
-const demoRouter = require('./routes/demo')
 
 const app = express()
+app.use(express.json())
+
 app.use(logger)
 
 app.use('/public', express.static(__dirname+'public'))
 app.use('/', indexRouter)
-app.use('/demo', demoRouter)
-
-app.use(express.json())
 
 app.use('/api/user/login', indexRouter)
 app.use('/api/books', indexRouter)
